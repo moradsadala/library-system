@@ -69,13 +69,14 @@ class AppController extends Controller
             'keywords'=>'required',
         ]);
         $book = Book::findOrFail($request->input('id'));
-        $book->category->id = $request->input('category');
+        $book->category_id = $request->input('category');
         $book->name = $request->input('name');
         $book->author = $request->input('author');
         $book->publisher = $request->input('publisher');
         $book->ISBN = $request->input('ISBN');
         $book->barcode = $request->input('barcode');
         $book->keywords = $request->input('keywords');
+        $book->description = $request->input('description');
         $book->save();
         return redirect()->route('home')->with('info','One item edited successfully');;
     }
@@ -83,7 +84,6 @@ class AppController extends Controller
         $book = Book::findOrFail($id);
         if ($book != null) {
             $book->delete();
-            $book->category()->delete();
             return redirect()->route('home')->with('info','The book is deleted successfully');
         }
         return redirect()->route('home')->with('info','An error ouccer');

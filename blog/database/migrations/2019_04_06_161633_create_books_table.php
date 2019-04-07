@@ -22,7 +22,7 @@ class CreateBooksTable extends Migration
             $table->integer('ISBN');
             $table->bigInteger('barcode');
             $table->string('keywords');
-            $table->text('description');
+            $table->text('description')->nullable();
         });
     }
 
